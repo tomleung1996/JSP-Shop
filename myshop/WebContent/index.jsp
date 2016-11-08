@@ -29,6 +29,9 @@
 		<c:if test="${!empty fail }">
 			<div class="alert alert-danger">${fail }</div>
 		</c:if>
+		<c:if test="${!empty success }">
+			<div class="alert alert-success">${success }</div>
+		</c:if>
 		<div class="goodlist" id="fakecrop">
 			<c:forEach items="${all }" var="good" varStatus="status">
 				<c:if test="${status.count eq 1||status.count % 4 eq 1}">
@@ -37,8 +40,13 @@
 				<div class="col-md-3 column">
 					<img alt="${good.gname }" src="${good.gpic }">
 					<h4 class="whitetext goodes">${good.gname }</h4>
-					<h4 class="whitetext goodes">仅售：￥${good.gprice }
-					</h4>
+					<h4 class="whitetext goodes">仅售：￥${good.gprice }</h4>
+					<div class="row text-center">
+					<form class="nobr" action="CartInsertServlet" method="post">
+					<input type="hidden" value="${good.gid }" name="gid">
+					<button type="submit" class="btn btn-sm btn-success" value="加入购物车">加入购物车</button>
+					</form>
+					</div>
 					<br>
 				</div>
 				<c:if test="${status.count % 4 eq 0}">

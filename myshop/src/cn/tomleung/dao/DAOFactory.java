@@ -7,4 +7,7 @@ public class DAOFactory {
 	public static GoodDAO getGoodDAOInstance(){  
         return new GoodDAOImpl() ;  
     } 
+	public static CartDAO getCartDAOInstance(){
+		return new CartDAOImpl();
+	}
 }
