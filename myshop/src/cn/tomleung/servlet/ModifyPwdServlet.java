@@ -28,7 +28,7 @@ public class ModifyPwdServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession(true);
-		String username = ((User) session.getAttribute("user")).getUsername();
+		int uid = ((User) session.getAttribute("user")).getUid();
 		String password = request.getParameter("password"); //获取原密码
 		String password2 = request.getParameter("password2"); //获取新密码
 		String password3 = request.getParameter("password3"); //获取新密码的确认密码
@@ -36,11 +36,11 @@ public class ModifyPwdServlet extends HttpServlet {
 		User user = new User();
 		InputVerify verify = new InputVerify();
 		
-		user.setUsername(username);
+		user.setUid(uid);
 		user.setPassword(password3);
 		
 		try {
-			if(!MD5.Bit32(password).equalsIgnoreCase(userDAO.queryByName(username).getPassword())){
+			if(!MD5.Bit32(password).equalsIgnoreCase(userDAO.queryByID(uid).getPassword())){
 				request.setAttribute("fail", "原密码不正确，请重新检查");
 				request.getRequestDispatcher("modifypwd.jsp").forward(request, response);
 				return;
@@ -63,7 +63,7 @@ public class ModifyPwdServlet extends HttpServlet {
 		
 		try {
 			userDAO.updatePwd(user);
-			user = userDAO.queryByName(username);
+			user = userDAO.queryByID(uid);
 			session.setAttribute("user", user);
 			response.sendRedirect("profile.jsp");
 			return;

@@ -16,18 +16,13 @@ public class UserDAOImpl implements UserDAO {
 		// TODO Auto-generated method stub
 		try {
 			dbc = new DBConnection();
-			sql = "INSERT INTO users(username,password) VALUES(?,md5(?))";
+			sql = "INSERT INTO users(username,password,gender,age,email) VALUES(?,md5(?),?,?,?)";
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setString(1, user.getUsername());
 			pstmt.setString(2, user.getPassword());
-			pstmt.executeUpdate();
-
-			sql = "INSERT INTO users_info(username,gender,age,email) VALUES(?,?,?,?)";
-			pstmt = dbc.getConnection().prepareStatement(sql);
-			pstmt.setString(1, user.getUsername());
-			pstmt.setString(2, user.getGender());
-			pstmt.setString(3, user.getAge());
-			pstmt.setString(4, user.getEmail());
+			pstmt.setString(3, user.getGender());
+			pstmt.setString(4, user.getAge());
+			pstmt.setString(5, user.getEmail());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (Exception e) {
@@ -42,12 +37,12 @@ public class UserDAOImpl implements UserDAO {
 		// TODO Auto-generated method stub
 		try {
 			dbc = new DBConnection();
-			sql = "UPDATE users_info SET gender=?,age=?,email=? WHERE username=?";
+			sql = "UPDATE users SET gender=?,age=?,email=? WHERE uid=?";
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setString(1, user.getGender());
 			pstmt.setString(2, user.getAge());
 			pstmt.setString(3, user.getEmail());
-			pstmt.setString(4, user.getUsername());
+			pstmt.setInt(4, user.getUid());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (Exception e) {
@@ -69,8 +64,7 @@ public class UserDAOImpl implements UserDAO {
 		User user = null;
 		try {
 			dbc = new DBConnection();
-			sql = "SELECT users.*,gender,privilege,age,email " + "FROM users,users_info "
-					+ "WHERE users.username=users_info.username " + "AND users.username=?";
+			sql = "SELECT * FROM users WHERE username=?";
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setString(1, username);
 			rs = pstmt.executeQuery();
@@ -98,8 +92,7 @@ public class UserDAOImpl implements UserDAO {
 	public List<User> queryAll() throws Exception {
 		// TODO Auto-generated method stub
 		List<User> all = new ArrayList<User>();
-		sql = "SELECT users.*,gender,privilege,age,email " + "FROM users,users_info "
-				+ "WHERE users.username=users_info.username";
+		sql = "SELECT * FROM users";
 		User user = null;
 		try {
 			dbc = new DBConnection();
@@ -131,10 +124,10 @@ public class UserDAOImpl implements UserDAO {
 		// TODO Auto-generated method stub
 		try {
 			dbc = new DBConnection();
-			sql = "UPDATE users SET password=md5(?) WHERE username=?";
+			sql = "UPDATE users SET password=md5(?) WHERE uid=?";
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setString(1, user.getPassword());
-			pstmt.setString(2, user.getUsername());
+			pstmt.setInt(2, user.getUid());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (Exception e) {
@@ -142,6 +135,36 @@ public class UserDAOImpl implements UserDAO {
 		} finally {
 			dbc.close();
 		}
+	}
+
+	@Override
+	public User queryByID(int uid) throws Exception {
+		// TODO Auto-generated method stub
+		User user = null;
+		try {
+			dbc = new DBConnection();
+			sql = "SELECT * FROM users WHERE uid=?";
+			pstmt = dbc.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, uid);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				user = new User();
+				user.setUid(rs.getInt("uid"));
+				user.setUsername(rs.getString("username"));
+				user.setPassword(rs.getString("password"));
+				user.setGender(rs.getString("gender"));
+				user.setPrivilege(rs.getString("privilege"));
+				user.setAge(rs.getString("age"));
+				user.setEmail(rs.getString("email"));
+			}
+			rs.close();
+			pstmt.close();
+		} catch (Exception e) {
+			throw new Exception("查询单用户失败");
+		} finally {
+			dbc.close();
+		}
+		return user;
 	}
 
 }

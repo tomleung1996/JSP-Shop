@@ -29,7 +29,7 @@ public class ModifyInfoServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession(true);
-		String username = ((User) session.getAttribute("user")).getUsername();
+		int uid = ((User) session.getAttribute("user")).getUid();
 		String gender = request.getParameter("gender");
 		String age = request.getParameter("age");
 		String email = request.getParameter("email");
@@ -37,7 +37,7 @@ public class ModifyInfoServlet extends HttpServlet {
 		User user = new User();
 		InputVerify verify = new InputVerify();
 
-		user.setUsername(username);
+		user.setUid(uid);
 		user.setGender(gender);
 		user.setAge(age);
 		user.setEmail(email);
@@ -54,7 +54,7 @@ public class ModifyInfoServlet extends HttpServlet {
 		}
 		try {
 			userDAO.updateInfo(user);
-			user = userDAO.queryByName(username);
+			user = userDAO.queryByID(uid);
 			session.setAttribute("user", user);
 			response.sendRedirect("profile.jsp");
 			return;

@@ -37,18 +37,19 @@
 				<div class="col-md-3 column">
 					<img alt="${good.gname }" src="${good.gpic }">
 					<h4 class="whitetext goodes">${good.gname }</h4>
-					<h4 class="whitetext goodes">仅售：￥${good.gprice }<br>
+					<h4 class="whitetext goodes">仅售：￥${good.gprice }<br></h4>
 					<c:if test="${user.privilege eq \"超级管理员\" }">
+					<div class="row text-center">
 					<form class="nobr" action="GoodSearchByIDServlet" method="post">
 					<input type="hidden" value="${good.gid }" name="gid">
-					<button type="submit" class="updatebtn" value="修改">修改</button>
+					<button type="submit" class="btn btn-sm btn-primary" value="修改">修改</button>
 					</form>&nbsp;&nbsp;&nbsp;
 					<form class="nobr" action="GoodDeleteServlet" method="post">
 					<input type="hidden" value="${good.gid }" name="gid">
-					<button type="submit" class="delete" value="删除" onclick="javascript:return deleteConfirm()">删除</button>
+					<button type="submit" class="btn btn-sm btn-danger" value="删除" onclick="javascript:return deleteConfirm()">删除</button>
 					</form>
 					</c:if>
-					</h4>
+					</div>
 					<br>
 				</div>
 				<c:if test="${status.count % 4 eq 0}">
