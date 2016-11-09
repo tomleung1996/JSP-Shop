@@ -6,7 +6,6 @@
 <html lang="en">
 <head>
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/button.css" rel="stylesheet">
 <script src="js/jquery-3.1.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/myscript.js"></script>

@@ -57,7 +57,7 @@ public class ShowAllServlet extends HttpServlet {
 			request.setAttribute("totalPages", totalPages);
 			request.setAttribute("currentPage", currentPage);
 			session.setAttribute("all", all);
-			if (flag != null) {
+			if (flag!=null) {
 				request.getRequestDispatcher("goodmanage.jsp").forward(request, response);
 				return;
 			}

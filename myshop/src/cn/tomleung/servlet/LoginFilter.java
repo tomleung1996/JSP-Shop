@@ -48,8 +48,8 @@ public class LoginFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) sresponse;
 		HttpSession session = request.getSession(true);
 		String target = request.getRequestURI();
-		String regex1 = "login\\.jsp|register\\.jsp|LoginServlet|RegisterServlet";  //过滤未登录用户
-		String regex2 = "goodmanage\\.jsp|goodupdate\\.jsp|goodinsert\\.jsp";  //过滤非超级管理员用户
+		String regex1 = "login\\.jsp|register\\.jsp|LoginServlet|RegisterServlet"; // 过滤未登录用户
+		String regex2 = "goodmanage\\.jsp|goodupdate\\.jsp|goodinsert\\.jsp"; // 过滤非超级管理员用户
 		Pattern p1 = Pattern.compile(regex1);
 		Matcher m1 = p1.matcher(target);
 		Pattern p2 = Pattern.compile(regex2);
@@ -59,11 +59,14 @@ public class LoginFilter implements Filter {
 			if (session.getAttribute("user") == null || ((User) session.getAttribute("user")).getUsername() == null) {
 				response.sendRedirect("login.jsp");
 				return;
-			} else if (m2.find()
-					&& !((User) session.getAttribute("user")).getPrivilege().equals("超级管理员")) {
+			} else if (m2.find() && !((User) session.getAttribute("user")).getPrivilege().equals("超级管理员")) {
 				request.setAttribute("fail", "对不起，该功能只允许超级管理员使用");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 				return;
+			} else if (target.indexOf("index.jsp") > 0) {
+				response.sendRedirect("ShowAllServlet");
+			} else if (target.indexOf("goodmanage.jsp") > 0) {
+				response.sendRedirect("ShowAllServlet?flag=1");
 			} else {
 				chain.doFilter(request, response);
 				return;

@@ -7,7 +7,6 @@
 <html lang="en">
 <head>
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/button.css" rel="stylesheet">
 <script src="js/jquery-3.1.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/myscript.js"></script>
@@ -59,9 +58,21 @@
 	</div>
 	<div class="row text-center">
 		<ul class="pagination">
+		<c:if test="${currentPage>1 }">
+		<li><a href="ShowAllServlet?currentPage=${currentPage-1 }&flag=1">&laquo;</a></li>
+		</c:if>
+		<c:if test="${currentPage<=1 }">
+		<li><a>&laquo;</a></li>
+		</c:if>
 		<c:forEach var="page" begin="1" end="${totalPages }">
-		<li><a href="ShowAllServlet?currentPage=${page }&flag=1">${page }</a></li>
+		<li <c:if test="${currentPage eq page }">class="active"</c:if>><a href="ShowAllServlet?currentPage=${page }&flag=1">${page }</a></li>
 		</c:forEach>
+		<c:if test="${currentPage<totalPages }">
+		<li><a href="ShowAllServlet?currentPage=${currentPage+1 }&flag=1">&raquo;</a></li>
+		</c:if>
+		<c:if test="${currentPage>=totalPages }">
+		<li><a>&raquo;</a></li>
+		</c:if>
 		</ul>
 	</div>
 	</div>
