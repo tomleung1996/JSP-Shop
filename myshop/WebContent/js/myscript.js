@@ -72,7 +72,7 @@ $(function() {
 })
 
 function deleteConfirm() {
-	var msg = "您真的确定要删除吗？";
+	var msg = "您真的确定吗？";
 	if (confirm(msg) == true) {
 		return true;
 	} else {

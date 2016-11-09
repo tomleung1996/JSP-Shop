@@ -9,8 +9,7 @@ public class Test {
 		// TODO Auto-generated method stub
 		Cart cart = null;
 		CartDAO cartDAO =DAOFactory.getCartDAOInstance();
-		cart=cartDAO.queryByUGID(1, 3);
-		System.out.println(cart.getUid()+"  "+cart.getGid()+"  "+cart.getQty());
+		cartDAO.truncate(1);
 	}
 
 }

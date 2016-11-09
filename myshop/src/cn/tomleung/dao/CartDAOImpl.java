@@ -129,4 +129,22 @@ public class CartDAOImpl implements CartDAO {
 		return cart;
 	}
 
+	@Override
+	public void truncate(int uid) throws Exception {
+		// TODO Auto-generated method stub
+		sql="DELETE FROM carts WHERE uid=?";
+		try{
+			dbc = new DBConnection();
+			pstmt = dbc.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, uid);
+			pstmt.executeUpdate();
+			pstmt.close();
+		}catch(Exception e){
+			throw new Exception("Çå¿Õ¹ºÎï³µÊ§°Ü");
+		}finally{
+			dbc.close();
+		}
+		return;
+	}
+
 }

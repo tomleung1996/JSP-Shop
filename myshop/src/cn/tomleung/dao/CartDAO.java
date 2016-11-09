@@ -8,6 +8,7 @@ public interface CartDAO {
 	public void insert(Cart cart) throws Exception;
 	public void update(Cart cart) throws Exception;
 	public void delete(Cart cart) throws Exception;
+	public void truncate(int uid) throws Exception;
 	public ArrayList<Cart> queryByID(int uid) throws Exception;
 	public Cart queryByUGID(int uid,int gid) throws Exception;
 	public ArrayList<Cart> queryAll() throws Exception;

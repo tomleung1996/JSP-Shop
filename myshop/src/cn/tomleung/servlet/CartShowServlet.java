@@ -32,21 +32,21 @@ public class CartShowServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(true);
 		int uid = ((User)session.getAttribute("user")).getUid();
-		ArrayList<VisualCart> all = new ArrayList<VisualCart>();
+		ArrayList<VisualCart> carts = new ArrayList<VisualCart>();
 		CartDAO cartDAO = DAOFactory.getCartDAOInstance();
 		GoodDAO goodDAO = DAOFactory.getGoodDAOInstance();
 		try {
-			ArrayList<Cart> carts = cartDAO.queryByID(uid);
-			for(Cart cart:carts){
+			ArrayList<Cart> cs = cartDAO.queryByID(uid);
+			for(Cart cart:cs){
 				VisualCart visualCart = new VisualCart();
 				Good tmpGood = goodDAO.queryByID(cart.getGid());
 				visualCart.setGname(tmpGood.getGname());
 				visualCart.setGprice(tmpGood.getGprice());
 				visualCart.setQty(cart.getQty());
 				visualCart.setSubsum(visualCart.getGprice()*visualCart.getQty());
-				all.add(visualCart);
+				carts.add(visualCart);
 			}
-			session.setAttribute("all", all);
+			session.setAttribute("carts", carts);
 			response.sendRedirect("cart.jsp");
 			return;
 		} catch (Exception e) {

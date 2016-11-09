@@ -19,29 +19,49 @@
 	<com:navbar site="cart"></com:navbar>
 	<div class="container">
 		<div class="jumbotron">
-		<h4 class="text-center">${user.username }的购物车</h4>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>商品名称</th>
-						<th>商品单价</th>
-						<th>购买数量</th>
-						<th>小计</th>
-						<th>操作</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${all }" var="cart" varStatus="status">
+			<h3 class="text-center">${user.username }的购物车</h3>
+			<c:if test="${!empty carts }">
+				<c:set var="sum" value="0" scope="page"></c:set>
+				<table class="table">
+					<thead>
 						<tr>
-							<td>${cart.gname }</td>
-							<td>￥${cart.gprice }</td>
-							<td>${cart.qty }</td>
-							<td>￥${cart.subsum }</td>
-							<td>未开放</td>
+							<th>商品名称</th>
+							<th>商品单价</th>
+							<th>购买数量</th>
+							<th>小计</th>
+							<th>操作</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<c:forEach items="${carts }" var="cart" varStatus="status">
+							<tr>
+								<td>${cart.gname }</td>
+								<td>￥${cart.gprice }</td>
+								<td>${cart.qty }</td>
+								<td>￥${cart.subsum }</td>
+								<td>未开放</td>
+								<c:set var="sum" value="${sum+cart.subsum }" scope="page"></c:set>
+							</tr>
+						</c:forEach>
+						<tr>
+							<td colspan="5" class="text-right">总计：
+								<h3 class="nobr">￥${sum }</h3>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="5" class="text-right"><form class="nobr"
+									action="CartTruncateServlet" method="post">
+									<button type="submit" class="btn btn-sm btn-danger"
+										value="清空购物车" onclick="javascript:return deleteConfirm()">清空购物车</button>
+								</form></td>
+						</tr>
+					</tbody>
+				</table>
+			</c:if>
+			<c:if test="${empty carts }">
+				<br>
+				<h4 class="text-center">————您的购物车空空如也————</h4>
+			</c:if>
 		</div>
 	</div>
 </body>
