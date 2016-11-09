@@ -39,7 +39,17 @@
 								<td>￥${cart.gprice }</td>
 								<td>${cart.qty }</td>
 								<td>￥${cart.subsum }</td>
-								<td>未开放</td>
+								<td>
+									<form class="nobr" action="CartAddServlet" method="post">
+										<input type="hidden" name="gid" value="${cart.gid }">
+										<button type="submit" class="btn btn-sm btn-success"
+											value="增加">+</button>
+									</form>
+									<form class="nobr" action="CartDeleteServlet" method="post">
+										<input type="hidden" name="gid" value="${cart.gid }">
+										<button type="submit" class="btn btn-sm btn-danger" value="减少">-</button>
+									</form>
+								</td>
 								<c:set var="sum" value="${sum+cart.subsum }" scope="page"></c:set>
 							</tr>
 						</c:forEach>

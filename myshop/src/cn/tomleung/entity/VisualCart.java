@@ -2,6 +2,8 @@ package cn.tomleung.entity;
 
 //这是一个购物车视图类，不是和数据库相关的数据模型，仅是为了方便显示
 public class VisualCart {
+	private int uid;
+	private int gid;
 	private String gname;
 	private double gprice;
 	private int qty;
@@ -29,5 +31,17 @@ public class VisualCart {
 	}
 	public void setSubsum(double subsum) {
 		this.subsum = subsum;
+	}
+	public int getUid() {
+		return uid;
+	}
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
+	public int getGid() {
+		return gid;
+	}
+	public void setGid(int gid) {
+		this.gid = gid;
 	}
 }

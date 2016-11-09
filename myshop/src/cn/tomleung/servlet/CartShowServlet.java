@@ -40,6 +40,8 @@ public class CartShowServlet extends HttpServlet {
 			for(Cart cart:cs){
 				VisualCart visualCart = new VisualCart();
 				Good tmpGood = goodDAO.queryByID(cart.getGid());
+				visualCart.setUid(cart.getUid());
+				visualCart.setGid(tmpGood.getGid());
 				visualCart.setGname(tmpGood.getGname());
 				visualCart.setGprice(tmpGood.getGprice());
 				visualCart.setQty(cart.getQty());
