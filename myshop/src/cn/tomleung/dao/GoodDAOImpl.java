@@ -2,6 +2,7 @@ package cn.tomleung.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import cn.tomleung.dbcon.DBConnection;
@@ -151,6 +152,54 @@ public class GoodDAOImpl implements GoodDAO {
 			dbc.close();
 		}
 		return good;
+	}
+
+	@Override
+	public ArrayList<Good> queryLimit(int from, int limit) throws Exception {
+		// TODO Auto-generated method stub
+		ArrayList<Good> all = new ArrayList<Good>();
+		sql = "SELECT * FROM goods LIMIT ?,?";
+		Good good = null;
+		try {
+			dbc = new DBConnection();
+			pstmt = dbc.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, from);
+			pstmt.setInt(2, limit);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				good = new Good();
+				good.setGid(rs.getInt("gid"));
+				good.setGname(rs.getString("gname"));
+				good.setGprice(rs.getDouble("gprice"));
+				good.setGpic(rs.getString("gpic"));
+				all.add(good);
+			}
+			rs.close();
+			pstmt.close();
+		} catch (Exception e) {
+			throw new Exception("查询限定商品失败");
+		} finally {
+			dbc.close();
+		}
+		return all;
+	}
+
+	@Override
+	public int queryAllCount() throws SQLException {
+		// TODO Auto-generated method stub
+		try {
+			dbc = new DBConnection();
+			sql = "SELECT COUNT(*) FROM goods";
+			pstmt = dbc.getConnection().prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()){
+			return rs.getInt(1);}
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			dbc.close();
+		}
+		return 0;
 	}
 
 }

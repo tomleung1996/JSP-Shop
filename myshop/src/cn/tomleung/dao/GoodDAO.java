@@ -11,4 +11,6 @@ public interface GoodDAO {
 	public ArrayList<Good> queryByName(String gname) throws Exception;
 	public Good queryByID(int gid) throws Exception;
 	public ArrayList<Good> queryAll() throws Exception;
+	public ArrayList<Good> queryLimit(int from,int limit) throws Exception;
+	public int queryAllCount() throws Exception;
 }

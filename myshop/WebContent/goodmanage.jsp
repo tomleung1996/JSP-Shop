@@ -57,6 +57,13 @@
 		</c:if>
 		</c:forEach>
 	</div>
+	<div class="row text-center">
+		<ul class="pagination">
+		<c:forEach var="page" begin="1" end="${totalPages }">
+		<li><a href="ShowAllServlet?currentPage=${page }&flag=1">${page }</a></li>
+		</c:forEach>
+		</ul>
+	</div>
 	</div>
 </body>
 </html>

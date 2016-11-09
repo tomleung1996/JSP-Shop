@@ -79,3 +79,9 @@ function deleteConfirm() {
 		return false;
 	}
 }
+function gotoSelectedPage()  
+{  
+    var x = document.getElementById("navigatorForm");  
+    //alert("Original action: " + x.action)  
+    x.submit();  
+} 

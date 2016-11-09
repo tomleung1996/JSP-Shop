@@ -17,7 +17,7 @@
 </head>
 <body>
 	<com:navbar site="cart"></com:navbar>
-	<div class="container">
+	<div class="container" id="cart">
 		<div class="jumbotron">
 			<h3 class="text-center">${user.username }的购物车</h3>
 			<c:if test="${!empty carts }">
@@ -35,19 +35,19 @@
 					<tbody>
 						<c:forEach items="${carts }" var="cart" varStatus="status">
 							<tr>
-								<td>${cart.gname }</td>
-								<td>￥${cart.gprice }</td>
-								<td>${cart.qty }</td>
-								<td>￥${cart.subsum }</td>
-								<td>
+								<td width="50%">${cart.gname }</td>
+								<td width="10%">￥${cart.gprice }</td>
+								<td width="15%">${cart.qty }</td>
+								<td width="10%">￥${cart.subsum }</td>
+								<td width="15%">
 									<form class="nobr" action="CartAddServlet" method="post">
 										<input type="hidden" name="gid" value="${cart.gid }">
 										<button type="submit" class="btn btn-sm btn-success"
-											value="增加">+</button>
+											value="增加"><strong>+</strong></button>
 									</form>
 									<form class="nobr" action="CartDeleteServlet" method="post">
 										<input type="hidden" name="gid" value="${cart.gid }">
-										<button type="submit" class="btn btn-sm btn-danger" value="减少">-</button>
+										<button type="submit" class="btn btn-sm btn-danger" value="减少"><strong>-</strong></button>
 									</form>
 								</td>
 								<c:set var="sum" value="${sum+cart.subsum }" scope="page"></c:set>

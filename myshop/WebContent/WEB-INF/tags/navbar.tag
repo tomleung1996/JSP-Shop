@@ -29,7 +29,7 @@
 						<c:if test="${user.privilege eq \"超级管理员\" }">
 						<li class="divider"></li>
 						<li class="<%if(site.equals("goodinsert")){out.print("active");}%>"><a href="goodinsert.jsp">添加商品</a></li>
-						<li class="<%if(site.equals("goodmanage")){out.print("active");}%>"><a href="goodmanage.jsp">商品管理</a></li>
+						<li class="<%if(site.equals("goodmanage")){out.print("active");}%>"><a href="ShowAllServlet?flag=1">商品管理</a></li>
 						</c:if>
 						<li class="divider"></li>
 						<li><a href="LogoutServlet">退出登录</a></li>
