@@ -16,7 +16,6 @@ import cn.tomleung.dao.GoodDAO;
 import cn.tomleung.entity.Cart;
 import cn.tomleung.entity.Good;
 import cn.tomleung.entity.User;
-import cn.tomleung.entity.VisualCart;
 
 /**
  * Servlet implementation class CartShowServlet
@@ -32,21 +31,21 @@ public class CartShowServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(true);
 		int uid = ((User)session.getAttribute("user")).getUid();
-		ArrayList<VisualCart> carts = new ArrayList<VisualCart>();
+		ArrayList<Cart> carts = new ArrayList<Cart>();
 		CartDAO cartDAO = DAOFactory.getCartDAOInstance();
 		GoodDAO goodDAO = DAOFactory.getGoodDAOInstance();
 		try {
 			ArrayList<Cart> cs = cartDAO.queryByID(uid);
 			for(Cart cart:cs){
-				VisualCart visualCart = new VisualCart();
+				Cart singleCart = new Cart();
 				Good tmpGood = goodDAO.queryByID(cart.getGid());
-				visualCart.setUid(cart.getUid());
-				visualCart.setGid(tmpGood.getGid());
-				visualCart.setGname(tmpGood.getGname());
-				visualCart.setGprice(tmpGood.getGprice());
-				visualCart.setQty(cart.getQty());
-				visualCart.setSubsum(visualCart.getGprice()*visualCart.getQty());
-				carts.add(visualCart);
+				singleCart.setUid(cart.getUid());
+				singleCart.setGid(tmpGood.getGid());
+				singleCart.setGname(tmpGood.getGname());
+				singleCart.setGprice(tmpGood.getGprice());
+				singleCart.setQty(cart.getQty());
+				singleCart.setSubsum(singleCart.getGprice()*singleCart.getQty());
+				carts.add(singleCart);
 			}
 			session.setAttribute("carts", carts);
 			response.sendRedirect("cart.jsp");

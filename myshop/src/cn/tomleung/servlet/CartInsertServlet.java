@@ -28,6 +28,7 @@ public class CartInsertServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		int gid = Integer.parseInt(request.getParameter("gid"));
 		int uid = ((User)session.getAttribute("user")).getUid();
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		Cart cart = new Cart();
 		cart.setUid(uid);
 		cart.setGid(gid);
@@ -38,13 +39,13 @@ public class CartInsertServlet extends HttpServlet {
 			if(tmpCart==null){
 				cartDAO.insert(cart);
 				request.setAttribute("success", "加入购物车成功！");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.getRequestDispatcher("ShowAllServlet?currentPage="+currentPage).forward(request, response);
 				return;
 			}else{
 				cart.setQty(tmpCart.getQty()+1);
 				cartDAO.update(cart);
 				request.setAttribute("success", "加入购物车成功！");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.getRequestDispatcher("ShowAllServlet?currentPage="+currentPage).forward(request, response);
 				return;
 			}
 		} catch (Exception e) {

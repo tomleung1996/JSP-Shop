@@ -42,7 +42,7 @@
 					<h4 class="whitetext goodes">${good.gname }</h4>
 					<h4 class="whitetext goodes">仅售：￥${good.gprice }</h4>
 					<div class="row text-center">
-						<form class="nobr" action="CartInsertServlet" method="post">
+						<form class="nobr" action="CartInsertServlet?currentPage=${currentPage }" method="post">
 							<input type="hidden" value="${good.gid }" name="gid">
 							<button type="submit" class="btn btn-sm btn-success"
 								value="加入购物车">加入购物车</button>
