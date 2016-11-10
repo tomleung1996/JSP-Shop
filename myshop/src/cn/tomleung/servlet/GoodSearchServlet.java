@@ -22,34 +22,65 @@ public class GoodSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		String gname = request.getParameter("gname");
-		gname=gname.trim();
+		gname = gname.trim();
 		GoodDAO goodDAO = DAOFactory.getGoodDAOInstance();
 		HttpSession session = request.getSession(true);
-		
+
+		String currentPageStr = request.getParameter("currentPage");
+		int itemPerPage = 8;
+		int currentPage = 1;
+		if (currentPageStr != null && !currentPageStr.equals("")) {
+			currentPage = Integer.parseInt(currentPageStr.trim());
+		}
+
 		try {
-			ArrayList<Good> all = goodDAO.queryByName(gname);
-			if(all.size()==0){
-				request.setAttribute("fail", "未搜索到任何内容");
-				session.setAttribute("all", all);
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+			int totalGoods = goodDAO.queryByName(gname).size();
+			if (totalGoods == 0) {
+				request.setAttribute("fail", "没有找到任何结果");
+				session.setAttribute("all", null);
+				request.getRequestDispatcher("search.jsp").forward(request, response);
 				return;
 			}
+			if (totalGoods < itemPerPage) {
+				itemPerPage = totalGoods;
+			}
+			int totalPages = totalGoods / itemPerPage + ((totalGoods % itemPerPage) > 0 ? 1 : 0);
+			ArrayList<Good> all = goodDAO.queryByNameLimit(gname, (currentPage - 1) * itemPerPage, itemPerPage);
+			request.setAttribute("totalPages", totalPages);
+			request.setAttribute("currentPage", currentPage);
 			session.setAttribute("all", all);
-			response.sendRedirect("index.jsp");
+			request.getRequestDispatcher("search.jsp").forward(request, response);
 			return;
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
+
+		// try {
+		// ArrayList<Good> all = goodDAO.queryByName(gname);
+		// if(all.size()==0){
+		// request.setAttribute("fail", "未搜索到任何内容");
+		// session.setAttribute("all", all);
+		// request.getRequestDispatcher("index.jsp").forward(request, response);
+		// return;
+		// }
+		// session.setAttribute("all", all);
+		// response.sendRedirect("ShowAllServlet?search=1");
+		// return;
+		// } catch (Exception e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+
 	}
 
 }

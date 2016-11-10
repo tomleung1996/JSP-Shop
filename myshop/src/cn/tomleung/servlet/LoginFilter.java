@@ -63,9 +63,11 @@ public class LoginFilter implements Filter {
 				request.setAttribute("fail", "对不起，该功能只允许超级管理员使用");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 				return;
+			} else if (target.indexOf("search") > 0) {
+				response.sendRedirect("ShowAllServlet?search=1");
 			} else if (target.indexOf("index.jsp") > 0) {
 				response.sendRedirect("ShowAllServlet");
-			} else if (target.indexOf("goodmanage.jsp") > 0) {
+			}else if (target.indexOf("goodmanage.jsp") > 0) {
 				response.sendRedirect("ShowAllServlet?flag=1");
 			} else {
 				chain.doFilter(request, response);

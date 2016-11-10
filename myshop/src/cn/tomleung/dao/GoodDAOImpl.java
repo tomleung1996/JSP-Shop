@@ -202,4 +202,35 @@ public class GoodDAOImpl implements GoodDAO {
 		return 0;
 	}
 
+	@Override
+	public ArrayList<Good> queryByNameLimit(String gname,int from,int limit) throws Exception {
+		// TODO Auto-generated method stub
+		ArrayList<Good> search = new ArrayList<Good>();
+		sql = "SELECT * FROM goods WHERE gname LIKE ? LIMIT ?,?";
+		Good good = null;
+		try {
+			dbc = new DBConnection();
+			pstmt = dbc.getConnection().prepareStatement(sql);
+			pstmt.setString(1, "%"+gname+"%");
+			pstmt.setInt(2, from);
+			pstmt.setInt(3, limit);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				good = new Good();
+				good.setGid(rs.getInt("gid"));
+				good.setGname(rs.getString("gname"));
+				good.setGprice(rs.getDouble("gprice"));
+				good.setGpic(rs.getString("gpic"));
+				search.add(good);
+			}
+			rs.close();
+			pstmt.close();
+		} catch (Exception e) {
+			throw new Exception("ËÑË÷·ÖÒ³ÉÌÆ·Ê§°Ü");
+		} finally {
+			dbc.close();
+		}
+		return search;
+	}
+
 }
