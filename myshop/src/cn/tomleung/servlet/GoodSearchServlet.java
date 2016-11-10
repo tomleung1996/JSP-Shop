@@ -29,10 +29,18 @@ public class GoodSearchServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		String gname = request.getParameter("gname");
-		gname = gname.trim();
-		GoodDAO goodDAO = DAOFactory.getGoodDAOInstance();
 		HttpSession session = request.getSession(true);
+		String gname = request.getParameter("gname");
+		
+		if(gname!=null){
+			gname = gname.trim();
+			session.setAttribute("gname", gname);
+		}else{
+			gname=(String)session.getAttribute("gname");
+		}
+		
+		GoodDAO goodDAO = DAOFactory.getGoodDAOInstance();
+		
 
 		String currentPageStr = request.getParameter("currentPage");
 		int itemPerPage = 8;
