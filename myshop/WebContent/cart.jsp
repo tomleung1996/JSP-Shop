@@ -73,5 +73,6 @@
 			</c:if>
 		</div>
 	</div>
+	<com:footer></com:footer>
 </body>
 </html>

@@ -21,7 +21,8 @@
 		<div class="row">
 			<div class="text-center whitetext">
 				<h1 class="loginhead">
-					<img alt="myspace" src="image/thisNightWhite.png">&nbsp;商品一览<br>
+					<img alt="myspace" src="image/thisNightWhite.png"
+						class="img-responsive center-block">&nbsp;商品一览<br>
 				</h1>
 			</div>
 		</div>
@@ -34,46 +35,48 @@
 		<c:set var="currentPage" value="1" scope="session"></c:set>
 		<div class="goodlist" id="fakecrop">
 			<c:forEach items="${all }" var="good" varStatus="status">
-				<c:if test="${status.count eq 1||status.count % 4 eq 1}">
-					<div class="row">
-				</c:if>
-				<div class="col-md-3 column"><a href="GoodDetailServlet?gid=${good.gid }">
-					<img alt="${good.gname }" src="${good.gpic }"></a>
-					<h4 class="whitetext goodes">${good.gname }</h4>
-					<h4 class="whitetext goodes">仅售：￥${good.gprice }</h4>
-					<div class="row text-center">
-						<form class="nobr" action="CartInsertServlet?currentPage=${currentPage }" method="post">
-							<input type="hidden" value="${good.gid }" name="gid">
-							<button type="submit" class="btn btn-sm btn-success"
-								value="加入购物车">加入购物车</button>
-						</form>
+				<div class="row-fluid">
+					<div class="col-md-3 col-sm-4 col-xs-12 column">
+						<a href="GoodDetailServlet?gid=${good.gid }"> <img
+							alt="${good.gname }" src="${good.gpic }"></a>
+						<h4 class="whitetext goodes">${good.gname }</h4>
+						<h4 class="whitetext goodes">仅售：￥${good.gprice }</h4>
+						<div class="row text-center">
+							<form class="nobr"
+								action="CartInsertServlet?currentPage=${currentPage }"
+								method="post">
+								<input type="hidden" value="${good.gid }" name="gid">
+								<button type="submit" class="btn btn-sm btn-success"
+									value="加入购物车">加入购物车</button>
+							</form>
+						</div>
+						<br>
 					</div>
-					<br>
 				</div>
-				<c:if test="${status.count % 4 eq 0}">
+			</c:forEach>
 		</div>
-		</c:if>
-		</c:forEach>
+		<div class="row"></div>
+		<div class="row text-center">
+			<ul class="pagination">
+				<c:if test="${currentPage>1 }">
+					<li><a href="ShowAllServlet?currentPage=${currentPage-1 }">&laquo;</a></li>
+				</c:if>
+				<c:if test="${currentPage<=1 }">
+					<li><a>&laquo;</a></li>
+				</c:if>
+				<c:forEach var="page" begin="1" end="${totalPages }">
+					<li <c:if test="${currentPage eq page }">class="active"</c:if>><a
+						href="ShowAllServlet?currentPage=${page }">${page }</a></li>
+				</c:forEach>
+				<c:if test="${currentPage<totalPages }">
+					<li><a href="ShowAllServlet?currentPage=${currentPage+1 }">&raquo;</a></li>
+				</c:if>
+				<c:if test="${currentPage>=totalPages }">
+					<li><a>&raquo;</a></li>
+				</c:if>
+			</ul>
+		</div>
 	</div>
-	<div class="row text-center">
-		<ul class="pagination">
-		<c:if test="${currentPage>1 }">
-		<li><a href="ShowAllServlet?currentPage=${currentPage-1 }">&laquo;</a></li>
-		</c:if>
-		<c:if test="${currentPage<=1 }">
-		<li><a>&laquo;</a></li>
-		</c:if>
-		<c:forEach var="page" begin="1" end="${totalPages }">
-		<li <c:if test="${currentPage eq page }">class="active"</c:if>><a href="ShowAllServlet?currentPage=${page }">${page }</a></li>
-		</c:forEach>
-		<c:if test="${currentPage<totalPages }">
-		<li><a href="ShowAllServlet?currentPage=${currentPage+1 }">&raquo;</a></li>
-		</c:if>
-		<c:if test="${currentPage>=totalPages }">
-		<li><a>&raquo;</a></li>
-		</c:if>
-		</ul>
-	</div>
-	</div>
+	<com:footer></com:footer>
 </body>
 </html>

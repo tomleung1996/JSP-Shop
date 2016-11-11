@@ -19,7 +19,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="jumbotron text-center">
-				<img alt="${good.gname }" src="${good.gpic }" id="goodpic"><br>
+				<img alt="${good.gname }" src="${good.gpic }" class="img-responsive center-block"><br>
 				<form class="nobr"
 					action="CartInsertServlet?currentPage=${currentPage }"
 					method="post">
@@ -61,5 +61,6 @@
 			</div>
 		</div>
 	</div>
+	<com:footer></com:footer>
 </body>
 </html>

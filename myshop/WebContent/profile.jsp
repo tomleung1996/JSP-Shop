@@ -21,7 +21,7 @@
 		<div class="row">
 			<div class="text-center whitetext">
 				<h1 class="loginhead">
-					<img alt="myspace" src="image/thisNightWhite.png">
+					<img alt="myspace" src="image/thisNightWhite.png" class="img-responsive center-block">
 				</h1>
 			</div>
 		</div>
@@ -30,16 +30,16 @@
 				欢迎您，亲爱的：${user.username}&nbsp;会员</div>
 			<table class="table table-striped table-bordered">
 				<tr>
-					<td><h4>您的权限是：</h4></td>
+					<td><h4>权限：</h4></td>
 					<td><h4>${user.privilege}</h4></td>
 				<tr>
-					<td><h4>您的性别是：</h4></td>
+					<td><h4>性别：</h4></td>
 					<td><h4>${user.gender}</h4></td>
 				<tr>
-					<td><h4>您的年龄是：</h4></td>
+					<td><h4>年龄：</h4></td>
 					<td><h4>${user.age}</h4></td>
 				<tr>
-					<td><h4>您的邮箱是：</h4></td>
+					<td><h4>邮箱：</h4></td>
 					<td><h4>${user.email}</h4></td>
 			</table>
 			<div class="text-center">
@@ -48,5 +48,6 @@
 			</div>
 		</div>
 	</div>
+	<com:footer></com:footer>
 </body>
 </html>

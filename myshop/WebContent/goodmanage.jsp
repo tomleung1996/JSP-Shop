@@ -21,7 +21,8 @@
 		<div class="row">
 			<div class="text-center whitetext">
 				<h1 class="loginhead">
-					<img alt="myspace" src="image/thisNightWhite.png">&nbsp;商品管理<br>
+					<img alt="myspace" src="image/thisNightWhite.png"
+						class="img-responsive center-block">&nbsp;商品管理<br>
 				</h1>
 			</div>
 		</div>
@@ -30,51 +31,55 @@
 		</c:if>
 		<div class="goodlist" id="fakecrop">
 			<c:forEach items="${all }" var="good" varStatus="status">
-				<c:if test="${status.count eq 1||status.count % 4 eq 1}">
-					<div class="row">
-				</c:if>
-				<div class="col-md-3 column"><a href="GoodDetailServlet?gid=${good.gid }">
-					<img alt="${good.gname }" src="${good.gpic }"></a>
+				<div class="col-md-3 col-sm-4 col-xs-12 column">
+				<div>
+					<a href="GoodDetailServlet?gid=${good.gid }"> <img
+						alt="${good.gname }" src="${good.gpic }"></a>
 					<h4 class="whitetext goodes">${good.gname }</h4>
-					<h4 class="whitetext goodes">仅售：￥${good.gprice }<br></h4>
+					<h4 class="whitetext goodes">
+						仅售：￥${good.gprice }<br>
+					</h4>
+					</div>
+					<div class="text-center">
 					<c:if test="${user.privilege eq \"超级管理员\" }">
-					<div class="row text-center">
-					<form class="nobr" action="GoodSearchByIDServlet" method="post">
-					<input type="hidden" value="${good.gid }" name="gid">
-					<button type="submit" class="btn btn-sm btn-primary" value="修改">修改</button>
-					</form>&nbsp;&nbsp;&nbsp;
+						<form class="nobr" action="GoodSearchByIDServlet" method="post">
+							<input type="hidden" value="${good.gid }" name="gid">
+							<button type="submit" class="btn btn-sm btn-primary" value="修改">修改</button>
+						</form>&nbsp;&nbsp;&nbsp;
 					<form class="nobr" action="GoodDeleteServlet" method="post">
-					<input type="hidden" value="${good.gid }" name="gid">
-					<button type="submit" class="btn btn-sm btn-danger" value="删除" onclick="javascript:return deleteConfirm()">删除</button>
-					</form>
+							<input type="hidden" value="${good.gid }" name="gid">
+							<button type="submit" class="btn btn-sm btn-danger" value="删除"
+								onclick="javascript:return deleteConfirm()">删除</button>
+						</form>
 					</c:if>
 					</div>
 					<br>
 				</div>
-				<c:if test="${status.count % 4 eq 0}">
+			</c:forEach>
 		</div>
-		</c:if>
-		</c:forEach>
+		<div class="row text-center">
+			<ul class="pagination">
+				<c:if test="${currentPage>1 }">
+					<li><a
+						href="ShowAllServlet?currentPage=${currentPage-1 }&flag=1">&laquo;</a></li>
+				</c:if>
+				<c:if test="${currentPage<=1 }">
+					<li><a>&laquo;</a></li>
+				</c:if>
+				<c:forEach var="page" begin="1" end="${totalPages }">
+					<li <c:if test="${currentPage eq page }">class="active"</c:if>><a
+						href="ShowAllServlet?currentPage=${page }&flag=1">${page }</a></li>
+				</c:forEach>
+				<c:if test="${currentPage<totalPages }">
+					<li><a
+						href="ShowAllServlet?currentPage=${currentPage+1 }&flag=1">&raquo;</a></li>
+				</c:if>
+				<c:if test="${currentPage>=totalPages }">
+					<li><a>&raquo;</a></li>
+				</c:if>
+			</ul>
+		</div>
 	</div>
-	<div class="row text-center">
-		<ul class="pagination">
-		<c:if test="${currentPage>1 }">
-		<li><a href="ShowAllServlet?currentPage=${currentPage-1 }&flag=1">&laquo;</a></li>
-		</c:if>
-		<c:if test="${currentPage<=1 }">
-		<li><a>&laquo;</a></li>
-		</c:if>
-		<c:forEach var="page" begin="1" end="${totalPages }">
-		<li <c:if test="${currentPage eq page }">class="active"</c:if>><a href="ShowAllServlet?currentPage=${page }&flag=1">${page }</a></li>
-		</c:forEach>
-		<c:if test="${currentPage<totalPages }">
-		<li><a href="ShowAllServlet?currentPage=${currentPage+1 }&flag=1">&raquo;</a></li>
-		</c:if>
-		<c:if test="${currentPage>=totalPages }">
-		<li><a>&raquo;</a></li>
-		</c:if>
-		</ul>
-	</div>
-	</div>
+	<com:footer></com:footer>
 </body>
 </html>

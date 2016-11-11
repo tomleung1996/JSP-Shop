@@ -76,5 +76,6 @@
 			</div>
 		</div>
 	</div>
+	<com:footer></com:footer>
 </body>
 </html>

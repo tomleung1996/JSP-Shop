@@ -19,7 +19,7 @@
 	<div class="row">
 		<div class="text-center whitetext">
 			<h1 class="loginhead">
-				<img alt="myspace" src="image/thisNightWhite.png"><br>登录
+				<img alt="myspace" src="image/thisNightWhite.png" class="img-responsive center-block"><br>登录
 			</h1>
 		</div>
 	</div>
@@ -61,5 +61,6 @@
 			</div>
 		</div>
 	</div>
+	<com:footer></com:footer>
 </body>
 </html>
