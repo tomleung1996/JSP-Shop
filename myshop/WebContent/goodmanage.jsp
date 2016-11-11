@@ -33,8 +33,8 @@
 				<c:if test="${status.count eq 1||status.count % 4 eq 1}">
 					<div class="row">
 				</c:if>
-				<div class="col-md-3 column">
-					<img alt="${good.gname }" src="${good.gpic }">
+				<div class="col-md-3 column"><a href="GoodDetailServlet?gid=${good.gid }">
+					<img alt="${good.gname }" src="${good.gpic }"></a>
 					<h4 class="whitetext goodes">${good.gname }</h4>
 					<h4 class="whitetext goodes">仅售：￥${good.gprice }<br></h4>
 					<c:if test="${user.privilege eq \"超级管理员\" }">

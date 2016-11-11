@@ -23,7 +23,7 @@
 			</div>
 			<div class="jumbotron" id="jumbotron">
 				<c:if test="${!empty fail }">
-				<div class="alert alert-danger">${fail }</div>
+					<div class="alert alert-danger">${fail }</div>
 				</c:if>
 				<div class="form">
 					<form class="form-horizontal" action="GoodInsertServlet"
@@ -44,11 +44,24 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label for="gorigin" class="col-sm-2 control-label">商品产地</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="gorigin" name="gorigin"
+									placeholder="请输入商品产地" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="gdes" class="col-sm-2 control-label">商品描述</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="6" cols="50"
+									placeholder="请输入不超过两百字的商品描述" name="gdes" id="gdes" maxlength="200"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
 							<label for="gpic" class="col-sm-2 control-label">商品图片</label>
 							<div class="col-sm-10">
 								<input type="file" class="form-control" id="gpic" name="gpic"
-									accept="image/png,image/jpeg" required>
-									<span>只接受不超过2M的jpg或png图片</span>
+									accept="image/png,image/jpeg" required> <span>只接受不超过2M的jpg或png图片</span>
 							</div>
 						</div>
 						<div class="form-group">

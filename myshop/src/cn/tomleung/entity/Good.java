@@ -5,7 +5,24 @@ public class Good {
 	private String gname;
 	private double gprice;
 	private String gpic;
-	private String gsrc;
+	private String gdes;
+	private String gorigin;
+
+	public String getGdes() {
+		return gdes;
+	}
+
+	public void setGdes(String gdes) {
+		this.gdes = gdes;
+	}
+
+	public String getGorigin() {
+		return gorigin;
+	}
+
+	public void setGorigin(String gorigin) {
+		this.gorigin = gorigin;
+	}
 
 	public int getGid() {
 		return gid;
@@ -39,11 +56,5 @@ public class Good {
 		this.gpic = gpic;
 	}
 
-	public String getGsrc() {
-		return gsrc;
-	}
 
-	public void setGsrc(String gsrc) {
-		this.gsrc = gsrc;
-	}
 }

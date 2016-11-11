@@ -15,18 +15,20 @@ public class GoodDAOImpl implements GoodDAO {
 	private ResultSet rs;
 
 	@Override
-	public void insert(Good good) throws Exception {
+	public void insert(Good good) throws SQLException {
 		// TODO Auto-generated method stub
 		try {
 			dbc = new DBConnection();
-			sql = "INSERT INTO goods(gname,gprice,gpic) values(?,?,?)";
+			sql = "INSERT INTO goods(gname,gprice,gpic,gdes,gorigin) values(?,?,?,?,?)";
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setString(1, good.getGname());
 			pstmt.setDouble(2, good.getGprice());
 			pstmt.setString(3, good.getGpic());
+			pstmt.setString(4, good.getGdes());
+			pstmt.setString(5, good.getGorigin());
 			pstmt.executeUpdate();
-		} catch (Exception e) {
-			throw new Exception("≤Â»Î ß∞‹");
+		} catch (SQLException e) {
+			throw e;
 		} finally {
 			dbc.close();
 		}
@@ -38,12 +40,14 @@ public class GoodDAOImpl implements GoodDAO {
 		try {
 			dbc = new DBConnection();
 
-			sql = "UPDATE goods SET gname=?,gprice=?,gpic=? WHERE gid=?";
+			sql = "UPDATE goods SET gname=?,gprice=?,gpic=?,gdes=?,gorigin=? WHERE gid=?";
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setString(1, good.getGname());
 			pstmt.setDouble(2, good.getGprice());
 			pstmt.setString(3, good.getGpic());
-			pstmt.setInt(4, good.getGid());
+			pstmt.setString(4, good.getGdes());
+			pstmt.setString(5, good.getGorigin());
+			pstmt.setInt(6, good.getGid());
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (Exception e) {
@@ -87,6 +91,8 @@ public class GoodDAOImpl implements GoodDAO {
 				good.setGname(rs.getString("gname"));
 				good.setGprice(rs.getDouble("gprice"));
 				good.setGpic(rs.getString("gpic"));
+				good.setGdes(rs.getString("gdes"));
+				good.setGorigin(rs.getString("gorigin"));
 				search.add(good);
 			}
 			rs.close();
@@ -115,6 +121,8 @@ public class GoodDAOImpl implements GoodDAO {
 				good.setGname(rs.getString("gname"));
 				good.setGprice(rs.getDouble("gprice"));
 				good.setGpic(rs.getString("gpic"));
+				good.setGdes(rs.getString("gdes"));
+				good.setGorigin(rs.getString("gorigin"));
 				all.add(good);
 			}
 			rs.close();
@@ -143,6 +151,8 @@ public class GoodDAOImpl implements GoodDAO {
 				good.setGname(rs.getString("gname"));
 				good.setGprice(rs.getDouble("gprice"));
 				good.setGpic(rs.getString("gpic"));
+				good.setGdes(rs.getString("gdes"));
+				good.setGorigin(rs.getString("gorigin"));
 			}
 			rs.close();
 			pstmt.close();
@@ -172,6 +182,8 @@ public class GoodDAOImpl implements GoodDAO {
 				good.setGname(rs.getString("gname"));
 				good.setGprice(rs.getDouble("gprice"));
 				good.setGpic(rs.getString("gpic"));
+				good.setGdes(rs.getString("gdes"));
+				good.setGorigin(rs.getString("gorigin"));
 				all.add(good);
 			}
 			rs.close();
@@ -221,6 +233,8 @@ public class GoodDAOImpl implements GoodDAO {
 				good.setGname(rs.getString("gname"));
 				good.setGprice(rs.getDouble("gprice"));
 				good.setGpic(rs.getString("gpic"));
+				good.setGdes(rs.getString("gdes"));
+				good.setGorigin(rs.getString("gorigin"));
 				search.add(good);
 			}
 			rs.close();

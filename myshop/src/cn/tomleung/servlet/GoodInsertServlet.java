@@ -62,6 +62,12 @@ public class GoodInsertServlet extends HttpServlet {
 					case "gprice":
 						good.setGprice(Double.parseDouble(value));
 						break;
+					case "gorigin":
+						good.setGorigin(value);;
+						break;
+					case "gdes":
+						good.setGdes(value);;
+						break;
 					default:
 						break;
 					}
@@ -69,7 +75,7 @@ public class GoodInsertServlet extends HttpServlet {
 					String fileName=item.getName();
 					int pos = fileName.lastIndexOf("\\");
 					fileName = fileName.substring(pos+1);
-					if(!(fileName.endsWith(".jpg")||fileName.endsWith(".png")||fileName.endsWith(".jpeg"))){
+					if(!(fileName.toLowerCase().endsWith(".jpg")||fileName.endsWith(".png")||fileName.endsWith(".jpeg"))){
 						request.setAttribute("fail", "文件格式不正确");
 						request.getRequestDispatcher("goodinsert.jsp").forward(request, response);
 						return;
@@ -91,7 +97,7 @@ public class GoodInsertServlet extends HttpServlet {
 			request.getRequestDispatcher("goodinsert.jsp").forward(request, response);
 			return;
         }catch(Exception e){  
-        	request.setAttribute("fail", "未知错误");
+        	request.setAttribute("fail", e.getMessage());
 			request.getRequestDispatcher("goodinsert.jsp").forward(request, response);
 			return;
         }

@@ -34,7 +34,7 @@
 					<tbody>
 						<c:forEach items="${carts }" var="cart" varStatus="status">
 							<tr>
-								<td width="50%">${cart.gname }</td>
+								<td width="50%"><a href="GoodDetailServlet?gid=${cart.gid }">${cart.gname }</a></td>
 								<td width="10%">￥${cart.gprice }</td>
 								<td width="15%">${cart.qty }</td>
 								<td width="10%">￥${cart.subsum }</td>

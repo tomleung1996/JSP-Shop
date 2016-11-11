@@ -7540,3 +7540,14 @@ button.close {
 	padding-left:10%;
 	padding-right:10%;
 }
+#goodpic{
+	border:0;
+	height:350px;
+	width:400px;
+	margin:0 auto;
+	display:block;
+}
+#gooddetail{
+	padding-left:10%;
+	padding-right:10%;
+}

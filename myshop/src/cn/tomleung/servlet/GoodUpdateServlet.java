@@ -65,6 +65,12 @@ public class GoodUpdateServlet extends HttpServlet {
 					case "gprice":
 						good.setGprice(Double.parseDouble(value));
 						break;
+					case "gorigin":
+						good.setGorigin(value);;
+						break;
+					case "gdes":
+						good.setGdes(value);;
+						break;
 					default:
 						break;
 					}
@@ -74,7 +80,7 @@ public class GoodUpdateServlet extends HttpServlet {
 					String fileName = item.getName();
 					int pos = fileName.lastIndexOf("\\");
 					fileName = fileName.substring(pos + 1);
-					if (!(fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".jpeg"))) {
+					if (!(fileName.toLowerCase().endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".jpeg"))) {
 						request.setAttribute("fail", "文件格式不正确");
 						request.getRequestDispatcher("goodupdate.jsp").forward(request, response);
 						return;
