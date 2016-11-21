@@ -54,7 +54,7 @@
 							<label for="gdes" class="col-sm-2 control-label">商品描述</label>
 							<div class="col-sm-10">
 								<textarea class="form-control" rows="6" cols="50"
-									placeholder="请输入不超过两百字的商品描述" name="gdes" id="gdes" maxlength="200"></textarea>
+									placeholder="请输入不超过两百五十字的商品描述" name="gdes" id="gdes" maxlength="250"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
@@ -75,6 +75,7 @@
 				</div>
 			</div>
 		</div>
+		<br>
 	</div>
 	<com:footer></com:footer>
 </body>

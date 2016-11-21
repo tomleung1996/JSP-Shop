@@ -57,6 +57,7 @@
 				</div>
 			</c:forEach>
 		</div>
+		<div class="row"></div>
 		<div class="row text-center">
 			<ul class="pagination">
 				<c:if test="${currentPage>1 }">

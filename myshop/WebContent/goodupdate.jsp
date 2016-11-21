@@ -17,7 +17,7 @@
 <title>商品信息修改</title>
 </head>
 <body>
-	<com:navbar site="modifyinfo"></com:navbar>
+	<com:navbar site="goodmanage"></com:navbar>
 	<div class="container">
 		<div class="row">
 			<div class="text-center whitetext">
@@ -59,8 +59,8 @@
 						<label for="gdes" class="col-sm-2 control-label">商品描述</label>
 						<div class="col-sm-10">
 							<textarea class="form-control" rows="6" cols="50"
-								placeholder="请输入两百字以内的商品描述" name="gdes" id="gdes"
-								maxlength="200">${good.gdes }</textarea>
+								placeholder="请输入两百五十字以内的商品描述" name="gdes" id="gdes"
+								maxlength="250">${good.gdes }</textarea>
 						</div>
 					</div>
 					<div class="form-group">

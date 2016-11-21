@@ -15,7 +15,7 @@
 <title>商品详情</title>
 </head>
 <body>
-	<com:navbar site="goodinsert"></com:navbar>
+	<com:navbar site="gooddetail"></com:navbar>
 	<div class="container">
 		<div class="row">
 			<div class="jumbotron text-center">

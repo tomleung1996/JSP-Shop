@@ -37,7 +37,8 @@
 			<c:forEach items="${all }" var="good" varStatus="status">
 				<div class="row-fluid">
 					<div class="col-md-3 col-sm-4 col-xs-12 column">
-						<img alt="${good.gname }" src="${good.gpic }">
+						<a href="GoodDetailServlet?gid=${good.gid }"><img
+							alt="${good.gname }" src="${good.gpic }"></a>
 						<h4 class="whitetext goodes">${good.gname }</h4>
 						<h4 class="whitetext goodes">仅售：￥${good.gprice }</h4>
 						<div class="row text-center">
@@ -54,6 +55,7 @@
 				</div>
 			</c:forEach>
 		</div>
+		<div class="row"></div>
 		<div class="row text-center">
 			<ul class="pagination">
 				<c:if test="${currentPage>1 }">
