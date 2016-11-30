@@ -38,7 +38,7 @@ public class OrderCreateServlet extends HttpServlet {
 			orderDAO.insert(carts);
 			cartDAO.truncate(uid);
 			session.setAttribute("carts", null);
-			response.sendRedirect("OrderShowServlet");
+			response.sendRedirect("cash.jsp");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

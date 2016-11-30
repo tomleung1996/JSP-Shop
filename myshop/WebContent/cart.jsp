@@ -65,7 +65,7 @@
 								</form><form class="nobr"
 									action="OrderCreateServlet" method="post">
 									<button type="submit" class="btn btn-sm btn-success"
-										value="清空购物车" onclick="javascript:return deleteConfirm()">结算</button>
+										value="结算" onclick="javascript:return deleteConfirm()">结算</button>
 								</form></td>
 						</tr>
 					</tbody>

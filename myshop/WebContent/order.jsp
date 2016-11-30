@@ -18,7 +18,6 @@
 <body>
 	<com:navbar site="order"></com:navbar>
 	<div class="container" id="cart">
-
 		<h1 class="text-center whitetext loginhead">${user.username }的历史订单</h1>
 		<c:if test="${!empty orders }">
 		<c:set var="sum" value="0" scope="page"></c:set>
