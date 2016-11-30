@@ -55,8 +55,8 @@
 						<td><h4>${good.gdes}</h4></td>
 				</table>
 				<div class="text-center">
-					<a href="ShowAllServlet"><button type="button"
-							class="btn btn-primary">返回首页</button></a>
+					<button type="button"
+							class="btn btn-primary" onclick="javascript:history.back(-1);">返回</button>
 				</div>
 			</div>
 		</div>

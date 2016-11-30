@@ -10,4 +10,7 @@ public class DAOFactory {
 	public static CartDAO getCartDAOInstance(){
 		return new CartDAOImpl();
 	}
+	public static OrderDAO getOrderDAOInstance(){
+		return new OrderDAOImpl();
+	}
 }
