@@ -7816,3 +7816,10 @@ button.close {
 	position: fixed;
 	bottom: 0;
 }
+#order{
+	padding-top:20px;
+	padding-bottom:10px;
+}
+.ordertable{
+	margin-bottom:0px;
+}

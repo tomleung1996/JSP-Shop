@@ -20,16 +20,12 @@
 	<div class="container" id="cart">
 		<h1 class="text-center whitetext loginhead">${user.username }的历史订单</h1>
 		<c:if test="${!empty orders }">
-		<c:set var="sum" value="0" scope="page"></c:set>
+			<c:set var="sum" value="0" scope="page"></c:set>
 			<c:forEach items="${orders }" var="orderhead" varStatus="status">
-				<div class="jumbotron">
-					<h5>
-						<strong>订单号：${orderhead.oid }</strong>
-					</h5>
-					<h5>
-						<strong>时间：${orderhead.otime }</strong>
-					</h5>
-					<table class="table">
+				<div class="jumbotron" id="order">
+					<h5 class="nobr"><strong>订单号：</strong>${orderhead.oid } &nbsp;&nbsp;
+						<strong>时间：</strong>${orderhead.otime }</h5><br><br>
+					<table class="table ordertable">
 						<thead>
 							<tr>
 								<th>商品名称</th>
@@ -42,7 +38,8 @@
 							<c:forEach items="${orderhead.order }" var="suborder"
 								varStatus="status">
 								<tr>
-									<td width="65%"><a href="GoodDetailServlet?gid=${suborder.good.gid }">${suborder.good.gname }</a></td>
+									<td width="65%"><a
+										href="GoodDetailServlet?gid=${suborder.good.gid }">${suborder.good.gname }</a></td>
 									<td width="15%">￥${suborder.good.gprice }</td>
 									<td width="15%">${suborder.qty }</td>
 									<td width="15%">￥${suborder.subsum }</td>
@@ -53,6 +50,14 @@
 								<td colspan="5" class="text-right">总计：
 									<h3 class="nobr">￥${sum }</h3>
 								</td>
+							</tr>
+							<tr>
+								<td colspan="4" class="text-right"><form class="nobr"
+										action="OrderDeleteServlet" method="post">
+										<input type="hidden" name="oid" value="${orderhead.oid }">
+										<button type="submit" class="btn btn-sm btn-danger"
+											value="删除此记录" onclick="javascript:return deleteConfirm()">删除此记录</button>
+									</form></td>
 							</tr>
 						</tbody>
 					</table>
