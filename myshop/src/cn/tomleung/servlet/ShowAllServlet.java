@@ -13,8 +13,6 @@ import javax.servlet.http.HttpSession;
 import cn.tomleung.dao.DAOFactory;
 import cn.tomleung.dao.GoodDAO;
 import cn.tomleung.entity.Good;
-//import cn.tomleung.entity.User;
-import cn.tomleung.entity.User;
 
 /**
  * Servlet implementation class ShowAllServlet
@@ -34,11 +32,6 @@ public class ShowAllServlet extends HttpServlet {
 		GoodDAO goodDAO = DAOFactory.getGoodDAOInstance();
 		HttpSession session = request.getSession(true);
 		String flag = request.getParameter("flag");
-
-		if (session.getAttribute("user") == null || ((User) session.getAttribute("user")).getUsername() == null) {
-			response.sendRedirect("login.jsp");
-			return;
-		}
 
 		String currentPageStr = request.getParameter("currentPage");
 		int itemPerPage = 8;

@@ -31,19 +31,11 @@ public class OrderShowServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(true);
-		if (session.getAttribute("user") == null || ((User) session.getAttribute("user")).getUsername() == null) {
-			response.sendRedirect("login.jsp");
-			return;
-		}
 		
 		int uid = ((User)session.getAttribute("user")).getUid();
 		OrderDAO orderDAO = DAOFactory.getOrderDAOInstance();
 		GoodDAO goodDAO = DAOFactory.getGoodDAOInstance();
 		try {
-//			ArrayList<Order> orders = orderDAO.queryByUID(uid);
-//			for(Order o:orders){
-//				o.setGood(goodDAO.queryByID(o.getGid()));
-//			}
 			ArrayList<OrderHead> orders = orderDAO.queryByUID(uid);
 			for(OrderHead o:orders){
 				for(Order o2:o.getOrder()){
@@ -51,8 +43,6 @@ public class OrderShowServlet extends HttpServlet {
 					o2.setSubsum(o2.getGood().getGprice()*o2.getQty());
 				}
 			}
-//			int count = orderDAO.queryOrderNumberByUID(uid);
-//			session.setAttribute("count", count);
 			Collections.sort(orders);
 			session.setAttribute("orders", orders);
 			response.sendRedirect("order.jsp");

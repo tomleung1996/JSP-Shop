@@ -20,7 +20,8 @@ import cn.tomleung.entity.User;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter("*.jsp")
+@WebFilter(urlPatterns = { "*.jsp", "/ShowAllServlet", "/OrderShowServlet", "/CartShowServlet", "/GoodDetailServlet",
+		"/GoodSearchServlet","/LogoutServlet" })
 public class LoginFilter implements Filter {
 
 	/**
@@ -67,7 +68,7 @@ public class LoginFilter implements Filter {
 				response.sendRedirect("ShowAllServlet?search=1");
 			} else if (target.indexOf("index.jsp") > 0) {
 				response.sendRedirect("ShowAllServlet");
-			}else if (target.indexOf("goodmanage.jsp") > 0) {
+			} else if (target.indexOf("goodmanage.jsp") > 0) {
 				response.sendRedirect("ShowAllServlet?flag=1");
 			} else {
 				chain.doFilter(request, response);
