@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="com"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,9 +34,12 @@
 			<div class="alert alert-success">${success }</div>
 		</c:if>
 		<c:set var="currentPage" value="1" scope="session"></c:set>
+		<c:set var="length" value="${fn:length(all) }" />
 		<div class="goodlist" id="fakecrop">
 			<c:forEach items="${all }" var="good" varStatus="status">
-				<div class="row-fluid">
+				<c:if test="${status.count eq 1 || (status.count-1) % 4 eq 0}">
+					<div class="row">
+				</c:if>
 					<div class="col-md-3 col-sm-4 col-xs-12 column">
 						<a href="GoodDetailServlet?gid=${good.gid }"> <img
 							alt="${good.gname }" src="${good.gpic }"></a>
@@ -52,7 +56,9 @@
 						</div>
 						<br>
 					</div>
-				</div>
+				<c:if test="${status.count % 4 eq 0 || status.count eq 4 || status.count eq length}">
+					 </div>
+				</c:if>
 			</c:forEach>
 		</div>
 		<div class="row"></div>
@@ -61,18 +67,12 @@
 				<c:if test="${currentPage>1 }">
 					<li><a href="ShowAllServlet?currentPage=${currentPage-1 }">&laquo;</a></li>
 				</c:if>
-				<c:if test="${currentPage<=1 }">
-					<li><a>&laquo;</a></li>
-				</c:if>
 				<c:forEach var="page" begin="1" end="${totalPages }">
 					<li <c:if test="${currentPage eq page }">class="active"</c:if>><a
 						href="ShowAllServlet?currentPage=${page }">${page }</a></li>
 				</c:forEach>
 				<c:if test="${currentPage<totalPages }">
 					<li><a href="ShowAllServlet?currentPage=${currentPage+1 }">&raquo;</a></li>
-				</c:if>
-				<c:if test="${currentPage>=totalPages }">
-					<li><a>&raquo;</a></li>
 				</c:if>
 			</ul>
 		</div>

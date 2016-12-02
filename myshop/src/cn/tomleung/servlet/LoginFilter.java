@@ -66,7 +66,7 @@ public class LoginFilter implements Filter {
 				return;
 			} else if (target.indexOf("search") > 0) {
 				response.sendRedirect("ShowAllServlet?search=1");
-			} else if (target.indexOf("index.jsp") > 0) {
+			} else if (target.indexOf("index.jsp") > 0||target.endsWith("cn")||target.endsWith("myshop/")) {
 				response.sendRedirect("ShowAllServlet");
 			} else if (target.indexOf("goodmanage.jsp") > 0) {
 				response.sendRedirect("ShowAllServlet?flag=1");
