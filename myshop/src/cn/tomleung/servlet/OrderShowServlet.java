@@ -38,10 +38,13 @@ public class OrderShowServlet extends HttpServlet {
 		try {
 			ArrayList<OrderHead> orders = orderDAO.queryByUID(uid);
 			for(OrderHead o:orders){
+				double sum=0;
 				for(Order o2:o.getOrder()){
 					o2.setGood(goodDAO.queryByID(o2.getGid()));
 					o2.setSubsum(o2.getGood().getGprice()*o2.getQty());
+					sum+=o2.getSubsum();
 				}
+				o.setSum(sum);
 			}
 			Collections.sort(orders);
 			session.setAttribute("orders", orders);

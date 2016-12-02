@@ -8,6 +8,7 @@ import java.util.Date;
 public class OrderHead implements Comparable<OrderHead>{
 	private int oid;
 	private Date otime;
+	private double sum;
 	private ArrayList<Order> order;
 	public int getOid() {
 		return oid;
@@ -27,6 +28,12 @@ public class OrderHead implements Comparable<OrderHead>{
 	}
 	public void setOrder(ArrayList<Order> order) {
 		this.order = order;
+	}
+	public double getSum() {
+		return sum;
+	}
+	public void setSum(double sum) {
+		this.sum = sum;
 	}
 	@Override
 	public int compareTo(OrderHead other) {

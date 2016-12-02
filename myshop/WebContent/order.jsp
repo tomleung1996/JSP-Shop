@@ -20,7 +20,7 @@
 	<div class="container" id="cart">
 		<h1 class="text-center whitetext loginhead">${user.username }的历史订单</h1>
 		<c:if test="${!empty orders }">
-			<c:set var="sum" value="0" scope="page"></c:set>
+<%-- 			<c:set var="sum" value="0" scope="page"></c:set> --%>
 			<c:forEach items="${orders }" var="orderhead" varStatus="status">
 				<div class="jumbotron" id="order">
 					<h5 class="nobr"><strong>订单号：</strong>${orderhead.oid } &nbsp;&nbsp;
@@ -44,11 +44,11 @@
 									<td width="15%">${suborder.qty }</td>
 									<td width="15%">￥${suborder.subsum }</td>
 								</tr>
-								<c:set var="sum" value="${sum+suborder.subsum }" scope="page"></c:set>
+<%-- 								<c:set var="sum" value="${sum+suborder.subsum }" scope="page"></c:set> --%>
 							</c:forEach>
 							<tr>
 								<td colspan="5" class="text-right">总计：
-									<h3 class="nobr">￥${sum }</h3>
+									<h3 class="nobr">￥${orderhead.sum }</h3>
 								</td>
 							</tr>
 							<tr>
