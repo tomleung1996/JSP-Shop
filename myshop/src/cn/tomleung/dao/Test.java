@@ -1,35 +1,35 @@
 package cn.tomleung.dao;
 
-
-import java.util.ArrayList;
-
-import cn.tomleung.entity.Order;
-import cn.tomleung.entity.OrderHead;
-
 public class Test {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-//		CartDAO cartDAO = DAOFactory.getCartDAOInstance();
-//		ArrayList<Cart> carts = cartDAO.queryByID(1);
-		
-		OrderDAO orderDAO = DAOFactory.getOrderDAOInstance();
+		int[] goodIDs = null;
+//		ArrayList<Good> goodList = new ArrayList<Good>();
+//		Map<String, Integer> sellSum = new LinkedHashMap<String, Integer>();
 		GoodDAO goodDAO = DAOFactory.getGoodDAOInstance();
-//		orderDAO.insert(carts);
-//		orderDAO.delete(8);
-		ArrayList<OrderHead> orders = orderDAO.queryByUID(1);
-		for(OrderHead o:orders){
-			for(Order o2:o.getOrder()){
-				o2.setGood(goodDAO.queryByID(o2.getGid()));
-			}
-		}
-		for(OrderHead o:orders){
-			System.out.println(o.getOid()+" "+o.getOtime());
-			for(Order o2:o.getOrder())
-				System.out.println("\t"+o2.getGid()+" "+o2.getGood().getGname()+" "+o2.getGood().getGorigin()+" "+o2.getQty());
-		}
-			
-//		System.out.println(orderDAO.queryOrderNumberByUID(3));
+//		try {
+			goodIDs = goodDAO.queryAllID();
+			for(int i:goodIDs)
+				System.out.println(i);
+//			int j = 0;
+//			for (int i : goodIDs) {
+//				goodList.add(goodDAO.queryByID(i));
+//				int singleSum = goodDAO.querySellSumByID(i);
+//				sellSum.put(goodList.get(j++).getGname(), singleSum);
+//			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		JSONArray gname = new JSONArray(sellSum.keySet());
+//		JSONArray sell = new JSONArray(sellSum.values());
+//		Map<String,JSONArray> a = new LinkedHashMap<String,JSONArray>();
+//		a.put("categories", gname);
+//		a.put("data", sell);
+//		JSONObject json = new JSONObject(a);
+////		System.out.println(gname);
+//		System.out.println(json.toString());
 	}
-
 }

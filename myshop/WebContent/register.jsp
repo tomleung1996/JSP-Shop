@@ -84,7 +84,7 @@
 						</div>
 						<div class="form-group">
 							<div class="text-center">
-								<button type="submit" class="btn btn-primary" value="提交">提交</button>
+								<button id="register" type="submit" class="btn btn-primary" value="提交">提交</button>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="login.jsp"><button
 										type="button" class="btn ">返回登录页面</button></a>
 							</div>

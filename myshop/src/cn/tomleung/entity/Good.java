@@ -1,6 +1,6 @@
 package cn.tomleung.entity;
 
-public class Good {
+public class Good{
 	private int gid;
 	private String gname;
 	private double gprice;

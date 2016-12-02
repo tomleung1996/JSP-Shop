@@ -64,7 +64,7 @@ public class UserDAOImpl implements UserDAO {
 		User user = null;
 		try {
 			dbc = new DBConnection();
-			sql = "SELECT * FROM users WHERE username=?";
+			sql = "SELECT * FROM users WHERE BINARY username=?";
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setString(1, username);
 			rs = pstmt.executeQuery();

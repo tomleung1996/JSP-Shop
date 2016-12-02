@@ -27,6 +27,9 @@ function validPwd() {
 	if (pwd.length < 8 && pwd != "") {
 		mdiv.innerHTML = "<font color='red'>密码必须大于八位数！</font>";
 		return false;
+	} else if (pwd.length == 0) {
+		mdiv.innerHTML = "";
+		return true;
 	} else {
 		mdiv.innerHTML = "";
 		return true;

@@ -83,7 +83,7 @@ public class GoodDAOImpl implements GoodDAO {
 		try {
 			dbc = new DBConnection();
 			pstmt = dbc.getConnection().prepareStatement(sql);
-			pstmt.setString(1, "%"+gname+"%");
+			pstmt.setString(1, "%" + gname + "%");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				good = new Good();
@@ -203,9 +203,10 @@ public class GoodDAOImpl implements GoodDAO {
 			dbc = new DBConnection();
 			sql = "SELECT COUNT(*) FROM goods";
 			pstmt = dbc.getConnection().prepareStatement(sql);
-			rs=pstmt.executeQuery();
-			if(rs.next()){
-			return rs.getInt(1);}
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
 		} catch (SQLException e) {
 			throw e;
 		} finally {
@@ -215,7 +216,7 @@ public class GoodDAOImpl implements GoodDAO {
 	}
 
 	@Override
-	public ArrayList<Good> queryByNameLimit(String gname,int from,int limit) throws Exception {
+	public ArrayList<Good> queryByNameLimit(String gname, int from, int limit) throws Exception {
 		// TODO Auto-generated method stub
 		ArrayList<Good> search = new ArrayList<Good>();
 		sql = "SELECT * FROM goods WHERE gname LIKE ? LIMIT ?,?";
@@ -223,7 +224,7 @@ public class GoodDAOImpl implements GoodDAO {
 		try {
 			dbc = new DBConnection();
 			pstmt = dbc.getConnection().prepareStatement(sql);
-			pstmt.setString(1, "%"+gname+"%");
+			pstmt.setString(1, "%" + gname + "%");
 			pstmt.setInt(2, from);
 			pstmt.setInt(3, limit);
 			rs = pstmt.executeQuery();
@@ -245,6 +246,48 @@ public class GoodDAOImpl implements GoodDAO {
 			dbc.close();
 		}
 		return search;
+	}
+
+	@Override
+	public int[] queryAllID() throws Exception {
+		// TODO Auto-generated method stub
+		int[] allID = null;
+		try {
+			dbc = new DBConnection();
+			sql = "SELECT DISTINCT gid FROM goods";
+			pstmt = dbc.getConnection().prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE);
+			rs = pstmt.executeQuery();
+			rs.last();
+			allID = new int[rs.getRow()];
+			rs.beforeFirst();
+			while (rs.next())
+				allID[rs.getRow() - 1] = rs.getInt(1);
+		} catch (Exception e) {
+			throw new Exception("查询全部商品ID失败");
+		} finally {
+			dbc.close();
+		}
+		return allID;
+	}
+
+	@Override
+	public int querySellSumByID(int gid) throws Exception {
+		// TODO Auto-generated method stub
+		int sellSum = 0;
+		try {
+			dbc = new DBConnection();
+			sql = "SELECT SUM(qty) FROM orders_view WHERE gid=?";
+			pstmt = dbc.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, gid);
+			rs = pstmt.executeQuery();
+			rs.next();
+			sellSum = rs.getInt(1);
+		} catch (Exception e) {
+			throw new Exception("查询商品销量失败");
+		} finally {
+			dbc.close();
+		}
+		return sellSum;
 	}
 
 }

@@ -21,7 +21,7 @@ import cn.tomleung.entity.User;
  * Servlet Filter implementation class LoginFilter
  */
 @WebFilter(urlPatterns = { "*.jsp", "/ShowAllServlet", "/OrderShowServlet", "/CartShowServlet", "/GoodDetailServlet",
-		"/GoodSearchServlet","/LogoutServlet" })
+		"/GoodSearchServlet","/LogoutServlet","/ShowSellSumServlet" })
 public class LoginFilter implements Filter {
 
 	/**

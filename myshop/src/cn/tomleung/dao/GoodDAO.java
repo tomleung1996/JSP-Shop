@@ -14,4 +14,6 @@ public interface GoodDAO {
 	public ArrayList<Good> queryAll() throws Exception;
 	public ArrayList<Good> queryLimit(int from,int limit) throws Exception;
 	public int queryAllCount() throws Exception;
+	public int[] queryAllID() throws Exception;
+	public int querySellSumByID(int gid) throws Exception;
 }
