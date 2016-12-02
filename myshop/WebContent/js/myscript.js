@@ -1,3 +1,26 @@
+function validUsr() {
+	var username = document.getElementById("username").value;
+	var mdiv = document.getElementById("usr");
+	if (username == "") {
+		mdiv.innerHTML = "<font color='red'>用户名不能为空！</font>";
+		return false;
+	}
+	$.ajax({
+		type : "POST",
+		url : "NameValidateServlet",
+		data : "username=" + username,
+		success : function(data) {
+			if (data == "true") {
+				mdiv.innerHTML = "<font color='green'>恭喜你！该用户名可用</font>";
+				return true;
+			} else {
+				mdiv.innerHTML = "<font color='red'>抱歉！该用户名已被占用</font>";
+				return false;
+			}
+		}
+	});
+}
+
 function validPwd() {
 	var mdiv = document.getElementById("pwd1");
 	var pwd = document.getElementById("password").value
@@ -85,8 +108,8 @@ function gotoSelectedPage() {
 	x.submit();
 }
 
-//$('#goodsubmit').click(function() {
-//	var description = $("#fake_gdes").val();
-//	$("#gdes").val(description);
-//	$("goodform").submit();
-//});
+// $('#goodsubmit').click(function() {
+// var description = $("#fake_gdes").val();
+// $("#gdes").val(description);
+// $("goodform").submit();
+// });

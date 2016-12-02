@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib tagdir="/WEB-INF/tags" prefix="com" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="com"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +37,8 @@
 							<label for="username" class="col-sm-2 control-label">用户名</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="username"
-									name="username" placeholder="请输入用户名" required>
+									name="username" placeholder="请输入用户名" required
+									onblur="return validUsr()"><span id="usr"></span>
 							</div>
 						</div>
 						<div class="form-group">

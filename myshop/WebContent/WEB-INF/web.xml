@@ -9,7 +9,6 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-
   <filter>
     <filter-name>ExpiresFilter</filter-name>
     <filter-class>org.apache.catalina.filters.ExpiresFilter</filter-class>
@@ -26,7 +25,6 @@
       <param-value>access plus 1 weeks</param-value>
     </init-param>
   </filter>
-
   <filter-mapping>
     <filter-name>ExpiresFilter</filter-name>
     <url-pattern>/*</url-pattern>
