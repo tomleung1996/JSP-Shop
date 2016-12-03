@@ -276,7 +276,7 @@ public class GoodDAOImpl implements GoodDAO {
 		int sellSum = 0;
 		try {
 			dbc = new DBConnection();
-			sql = "SELECT SUM(qty) FROM orders_view WHERE gid=?";
+			sql = "SELECT SUM(qty) FROM order_details WHERE gid=?";
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, gid);
 			rs = pstmt.executeQuery();

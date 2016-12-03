@@ -17,7 +17,7 @@
 			<h1 class="text-center whitetext loginhead">MySpace商品销量统计</h1>
 		</div>
 		<div class="row">
-			<div id="chart" style="width: auto; height: 400px;"></div>
+			<div id="chart" style="width: auto; height: 500px;"></div>
 		</div>
 	</div>
 	<script>
@@ -38,8 +38,16 @@
 				data : [],
 				nameTextStyle:{
 					fontSize:20
+				},
+				axisLabel:{
+					show:true,
+					interval:0,
+					rotate:35
 				}
 			},
+			dataZoom:[{
+				type:'inside'
+			}],
 			yAxis : {},
 			series : [ {
 				name : '销量',

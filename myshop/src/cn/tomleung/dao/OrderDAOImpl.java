@@ -47,21 +47,21 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public void delete(int oid) throws Exception {
+	public void delete(int oid) throws SQLException {
 		// TODO Auto-generated method stub
 		try{
 			dbc=new DBConnection();
-			sql="DELETE FROM order_details WHERE oid=?";
+			sql="UPDATE orders SET odel=1 WHERE oid=?";
 			pstmt=dbc.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, oid);
 			pstmt.executeUpdate();
-			sql="DELETE FROM orders WHERE oid=?";
-			pstmt=dbc.getConnection().prepareStatement(sql);
-			pstmt.setInt(1, oid);
-			pstmt.executeUpdate();
+//			sql="DELETE FROM orders WHERE oid=?";
+//			pstmt=dbc.getConnection().prepareStatement(sql);
+//			pstmt.setInt(1, oid);
+//			pstmt.executeUpdate();
 			pstmt.close();
-		}catch(Exception e){
-			throw new Exception("É¾³ýÊ§°Ü");
+		}catch(SQLException e){
+			throw e;
 		}finally{
 			dbc.close();
 		}
@@ -105,7 +105,7 @@ public class OrderDAOImpl implements OrderDAO {
 		Order order = null;
 		try {
 			dbc = new DBConnection();
-			sql = "SELECT * FROM orders_view WHERE uid=?";
+			sql = "SELECT * FROM orders_view WHERE uid=? AND odel=0";
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, uid);
 			rs = pstmt.executeQuery();
