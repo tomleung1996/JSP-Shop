@@ -9,13 +9,13 @@
 <script src="js/echarts.js"></script>
 <script src="js/jquery-3.1.0.min.js"></script>
 <script src="js/myscript.js"></script>
-<title>销量统计</title>
+<title>购买量统计</title>
 </head>
 <body>
-	<com:navbar site="sell"></com:navbar>
+	<com:navbar site="buy"></com:navbar>
 	<div class="container" id="main">
 		<div class="row">
-			<h1 class="text-center whitetext loginhead">MySpace商品销量统计</h1>
+			<h1 class="text-center whitetext loginhead">MySpace用户购买量统计</h1>
 		</div>
 		<div class="row">
 			<div id="chart" style="width: auto; height: 500px;"></div>
@@ -25,14 +25,14 @@
 		var myChart = echarts.init(document.getElementById('chart'));
 		myChart.setOption({
 			title : {
-				text : 'MySpace商城商品销量图',
+				text : 'MySpace用户购买量统计',
 				show : false
 			},
-			color:['#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
+			//color:['#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
 			backgroundColor : '#ffffff',
 			tooltip : {},
 			legend : {
-				data : [ '销量' ],
+				data : [ '购买量' ],
 				show : false
 			},
 			tooltip: {
@@ -49,7 +49,7 @@
 				axisLabel:{
 					show:true,
 					interval:0,
-					rotate:35
+					rotate:0
 				}
 			},
 			dataZoom:[{
@@ -57,7 +57,7 @@
 			}],
 			yAxis : {},
 			series : [ {
-				name : '销量',
+				name : '购买量',
 				type : 'bar',
 				label:{
 					normal:{
@@ -76,7 +76,7 @@
 		$.ajax({
 			type : "post",
 			async : true,
-			url : "ShowSellSumServlet",
+			url : "ShowBuySumServlet",
 			data : {},
 			dataType : "json",
 			success : function(result) {
@@ -92,7 +92,7 @@
 							data :result.categories
 						},
 						series : [ {
-							name : '销量',
+							name : '购买量',
 							data : result.data
 						} ]
 					});

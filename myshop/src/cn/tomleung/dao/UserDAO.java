@@ -12,4 +12,6 @@ public interface UserDAO {
 	public User queryByName(String username) throws Exception;
 	public User queryByID(int uid) throws Exception;
 	public List<User> queryAll() throws Exception;
+	public int[] queryAllID() throws Exception;
+	public int queryBuySumByID(int gid) throws Exception;
 }

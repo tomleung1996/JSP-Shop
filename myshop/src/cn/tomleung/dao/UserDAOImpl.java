@@ -167,4 +167,46 @@ public class UserDAOImpl implements UserDAO {
 		return user;
 	}
 
+	@Override
+	public int[] queryAllID() throws Exception {
+		// TODO Auto-generated method stub
+		int[] allID = null;
+		try {
+			dbc = new DBConnection();
+			sql = "SELECT DISTINCT uid FROM users";
+			pstmt = dbc.getConnection().prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE);
+			rs = pstmt.executeQuery();
+			rs.last();
+			allID = new int[rs.getRow()];
+			rs.beforeFirst();
+			while (rs.next())
+				allID[rs.getRow() - 1] = rs.getInt(1);
+		} catch (Exception e) {
+			throw new Exception("查询全部用户ID失败");
+		} finally {
+			dbc.close();
+		}
+		return allID;
+	}
+
+	@Override
+	public int queryBuySumByID(int uid) throws Exception {
+		// TODO Auto-generated method stub
+		int buySum = 0;
+		try {
+			dbc = new DBConnection();
+			sql = "SELECT SUM(qty) FROM orders_view WHERE uid=?";
+			pstmt = dbc.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, uid);
+			rs = pstmt.executeQuery();
+			rs.next();
+			buySum = rs.getInt(1);
+		} catch (Exception e) {
+			throw new Exception("查询商品销量失败");
+		} finally {
+			dbc.close();
+		}
+		return buySum;
+	}
+
 }

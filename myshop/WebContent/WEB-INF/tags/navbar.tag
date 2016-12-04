@@ -16,9 +16,18 @@
 			<ul class="nav navbar-nav">
 				<li class="<%if(site.equals("main")){out.print("active");}%>"><a href="ShowAllServlet">首页</a></li>
 				<%if ((session.getAttribute("user") instanceof User) && ((User) session.getAttribute("user")).getUsername() != null) {%>
-				<li class="<%if(site.equals("sell")){out.print("active");}%>"><a href="sellsum.jsp">热销榜</a></li>
 				<li class="<%if(site.equals("cart")){out.print("active");}%>"><a href="CartShowServlet">购物车</a></li>
 				<li class="<%if(site.equals("order")){out.print("active");}%>"><a href="OrderShowServlet">已买到的宝贝</a></li>
+				<li class="dropdown <%if(site.equals("sell")||site.equals("buy")){out.print("active");}%>">
+				<a href="sellsum.jsp"
+					class="dropdown-toggle" data-toggle="dropdown">综合信息统计<b
+						class="caret"></b>
+				</a>
+					<ul class="dropdown-menu">
+						<li class="<%if(site.equals("sell")){out.print("active");}%>"><a href="sellsum.jsp">热销榜</a></li>
+						<li class="<%if(site.equals("buy")){out.print("active");}%>"><a href="buysum.jsp">剁手榜</a></li>
+					</ul></li>
+					
 				<li class="dropdown <%if(site.equals("profile")||site.equals("modifyinfo")||site.equals("modifypwd")){out.print("active");}%>">
 				<a href="profile.jsp"
 					class="dropdown-toggle" data-toggle="dropdown">${user.privilege }：${user.username }<b

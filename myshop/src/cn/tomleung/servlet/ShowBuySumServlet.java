@@ -17,41 +17,39 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import cn.tomleung.dao.DAOFactory;
-import cn.tomleung.dao.GoodDAO;
-import cn.tomleung.entity.Good;
+import cn.tomleung.dao.UserDAO;
+import cn.tomleung.entity.User;
 
 /**
- * Servlet implementation class ShowSellSumServlet
+ * Servlet implementation class ShowBuySumServlet
  */
-@WebServlet("/ShowSellSumServlet")
-public class ShowSellSumServlet extends HttpServlet {
+@WebServlet("/ShowBuySumServlet")
+public class ShowBuySumServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int[] goodIDs = null;
-		ArrayList<Good> goodList = new ArrayList<Good>();
-		Map<String, Integer> sellSum = new LinkedHashMap<String, Integer>();
-		GoodDAO goodDAO = DAOFactory.getGoodDAOInstance();
+		int[] userIDs = null;
+		ArrayList<User> userList = new ArrayList<User>();
+		Map<String, Integer> buySum = new LinkedHashMap<String, Integer>();
+		UserDAO userDAO = DAOFactory.getUserDAOInstance();
 		try {
-			goodIDs = goodDAO.queryAllID();
+			userIDs = userDAO.queryAllID();
 			int j = 0;
-			for (int i : goodIDs) {
-				goodList.add(goodDAO.queryByID(i));
-				int singleSum = goodDAO.querySellSumByID(i);
-				sellSum.put(goodList.get(j++).getGname(), singleSum);
+			for (int i : userIDs) {
+				userList.add(userDAO.queryByID(i));
+				int singleSum = userDAO.queryBuySumByID(i);
+				buySum.put(userList.get(j++).getUsername(), singleSum);
 			}
-			sellSum=sortByValue(sellSum);
-			JSONArray gname = new JSONArray(sellSum.keySet());
-			JSONArray sell = new JSONArray(sellSum.values());
+			buySum=sortByValue(buySum);
+			JSONArray uname = new JSONArray(buySum.keySet());
+			JSONArray buy = new JSONArray(buySum.values());
 			Map<String, JSONArray> a = new LinkedHashMap<String, JSONArray>();
-			a.put("categories", gname);
-			a.put("data", sell);
+			a.put("categories", uname);
+			a.put("data", buy);
 			JSONObject json = new JSONObject(a);
 			response.setContentType("text/html; charset=utf-8");
 			response.getWriter().write(json.toString());
