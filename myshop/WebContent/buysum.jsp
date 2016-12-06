@@ -9,6 +9,9 @@
 <script src="js/echarts.js"></script>
 <script src="js/jquery-3.1.0.min.js"></script>
 <script src="js/myscript.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<Link Rel="SHORTCUT ICON" href="image/favicon.ico">
 <title>购买量统计</title>
 </head>
 <body>
@@ -54,6 +57,10 @@
 			},
 			dataZoom:[{
 				type:'inside'
+			},{
+				type:'slider',
+				orient:'vertical',
+				filterMode:'empty'
 			}],
 			yAxis : {},
 			series : [ {

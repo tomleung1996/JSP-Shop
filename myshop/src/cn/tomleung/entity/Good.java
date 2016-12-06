@@ -1,6 +1,12 @@
 package cn.tomleung.entity;
 
-public class Good{
+import java.io.Serializable;
+
+public class Good implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5109535777709019791L;
 	private int gid;
 	private String gname;
 	private double gprice;

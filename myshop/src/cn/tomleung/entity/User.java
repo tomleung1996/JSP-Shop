@@ -1,6 +1,12 @@
 package cn.tomleung.entity;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1212133494166003791L;
 	private int uid;
 	private String username;
 	private String password;

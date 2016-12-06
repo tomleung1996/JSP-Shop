@@ -1,11 +1,16 @@
 package cn.tomleung.entity;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class OrderHead implements Comparable<OrderHead>{
+public class OrderHead implements Comparable<OrderHead>,Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -888313804342501279L;
 	private int oid;
 	private Date otime;
 	private double sum;

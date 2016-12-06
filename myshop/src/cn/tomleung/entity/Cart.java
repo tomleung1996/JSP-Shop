@@ -1,6 +1,12 @@
 package cn.tomleung.entity;
 
-public class Cart {
+import java.io.Serializable;
+
+public class Cart implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6358532741127541719L;
 	private int uid;
 	private int gid;
 	private int qty;

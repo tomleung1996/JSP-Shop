@@ -1,10 +1,15 @@
 package cn.tomleung.entity;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Order {
+public class Order implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7644163626370491117L;
 	private int oid;
 	private int uid;
 	private Date otime;
