@@ -13,6 +13,7 @@ public class Good implements Serializable{
 	private String gpic;
 	private String gdes;
 	private String gorigin;
+	private boolean gdel;
 
 	public String getGdes() {
 		return gdes;
@@ -60,6 +61,14 @@ public class Good implements Serializable{
 
 	public void setGpic(String gpic) {
 		this.gpic = gpic;
+	}
+
+	public boolean isGdel() {
+		return gdel;
+	}
+
+	public void setGdel(boolean gdel) {
+		this.gdel = gdel;
 	}
 
 

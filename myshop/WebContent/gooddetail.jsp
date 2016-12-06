@@ -20,12 +20,14 @@
 		<div class="row">
 			<div class="jumbotron text-center">
 				<img alt="${good.gname }" src="${good.gpic }" class="img-responsive center-block"><br>
+				<c:if test="${good.gdel ne true }">
 				<form class="nobr"
 					action="CartInsertServlet?currentPage=${currentPage }"
 					method="post">
 					<input type="hidden" value="${good.gid }" name="gid">
 					<button type="submit" class="btn btn-sm btn-success" value="加入购物车">加入购物车</button>
 				</form>
+				
 				<c:if test="${user.privilege eq \"超级管理员\" }">
 				&nbsp;&nbsp;&nbsp;
 					<form class="nobr" action="GoodSearchByIDServlet" method="post">
@@ -38,6 +40,11 @@
 						<button type="submit" class="btn btn-sm btn-danger" value="删除"
 							onclick="javascript:return deleteConfirm()">删除</button>
 					</form>
+					
+				</c:if>
+				</c:if>
+				<c:if test="${good.gdel eq true }">
+				<p class="nobr" style="color:red;"><strong>此商品已经下架，仅允许浏览操作</strong></p>
 				</c:if>
 				<br><br>
 				<table class="table table-striped table-bordered text-left">

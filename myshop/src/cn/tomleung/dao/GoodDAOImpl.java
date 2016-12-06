@@ -57,12 +57,28 @@ public class GoodDAOImpl implements GoodDAO {
 		}
 	}
 
+//	@Override
+//	public void delete(Good good) throws Exception {
+//		// TODO Auto-generated method stub
+//		try {
+//			dbc = new DBConnection();
+//			sql = "DELETE FROM goods WHERE gid=?";
+//			pstmt = dbc.getConnection().prepareStatement(sql);
+//			pstmt.setInt(1, good.getGid());
+//			pstmt.executeUpdate();
+//			pstmt.close();
+//		} catch (Exception e) {
+//			throw new Exception("É¾³ýÊ§°Ü");
+//		} finally {
+//			dbc.close();
+//		}
+//	}
 	@Override
 	public void delete(Good good) throws Exception {
 		// TODO Auto-generated method stub
 		try {
 			dbc = new DBConnection();
-			sql = "DELETE FROM goods WHERE gid=?";
+			sql = "UPDATE goods SET gdel=1 WHERE gid=?";
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, good.getGid());
 			pstmt.executeUpdate();
@@ -78,7 +94,7 @@ public class GoodDAOImpl implements GoodDAO {
 	public ArrayList<Good> queryByName(String gname) throws Exception {
 		// TODO Auto-generated method stub
 		ArrayList<Good> search = new ArrayList<Good>();
-		sql = "SELECT * FROM goods WHERE gname LIKE ?";
+		sql = "SELECT * FROM goods WHERE gname LIKE ? AND gdel=0";
 		Good good = null;
 		try {
 			dbc = new DBConnection();
@@ -109,7 +125,7 @@ public class GoodDAOImpl implements GoodDAO {
 	public ArrayList<Good> queryAll() throws Exception {
 		// TODO Auto-generated method stub
 		ArrayList<Good> all = new ArrayList<Good>();
-		sql = "SELECT * FROM goods";
+		sql = "SELECT * FROM goods WHERE gdel=0";
 		Good good = null;
 		try {
 			dbc = new DBConnection();
@@ -153,6 +169,7 @@ public class GoodDAOImpl implements GoodDAO {
 				good.setGpic(rs.getString("gpic"));
 				good.setGdes(rs.getString("gdes"));
 				good.setGorigin(rs.getString("gorigin"));
+				good.setGdel(rs.getInt("gdel")==1?true:false);
 			}
 			rs.close();
 			pstmt.close();
@@ -168,7 +185,7 @@ public class GoodDAOImpl implements GoodDAO {
 	public ArrayList<Good> queryLimit(int from, int limit) throws Exception {
 		// TODO Auto-generated method stub
 		ArrayList<Good> all = new ArrayList<Good>();
-		sql = "SELECT * FROM goods LIMIT ?,?";
+		sql = "SELECT * FROM goods WHERE gdel=0 LIMIT ?,?";
 		Good good = null;
 		try {
 			dbc = new DBConnection();
@@ -201,7 +218,7 @@ public class GoodDAOImpl implements GoodDAO {
 		// TODO Auto-generated method stub
 		try {
 			dbc = new DBConnection();
-			sql = "SELECT COUNT(*) FROM goods";
+			sql = "SELECT COUNT(*) FROM goods WHERE gdel=0";
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -219,7 +236,7 @@ public class GoodDAOImpl implements GoodDAO {
 	public ArrayList<Good> queryByNameLimit(String gname, int from, int limit) throws Exception {
 		// TODO Auto-generated method stub
 		ArrayList<Good> search = new ArrayList<Good>();
-		sql = "SELECT * FROM goods WHERE gname LIKE ? LIMIT ?,?";
+		sql = "SELECT * FROM goods WHERE gname LIKE ? AND gdel=0 LIMIT ?,?";
 		Good good = null;
 		try {
 			dbc = new DBConnection();
@@ -254,7 +271,7 @@ public class GoodDAOImpl implements GoodDAO {
 		int[] allID = null;
 		try {
 			dbc = new DBConnection();
-			sql = "SELECT DISTINCT gid FROM goods";
+			sql = "SELECT DISTINCT gid FROM goods WHERE gdel=0";
 			pstmt = dbc.getConnection().prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE);
 			rs = pstmt.executeQuery();
 			rs.last();
